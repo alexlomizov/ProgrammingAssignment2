@@ -1,7 +1,16 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Matrix inversion is usually a costly computation.
+## These function implement caching of matrix inverse.
+## A mtrix is set (and can be reset) with makeCacheMatrix function.
+## An inverse is retrieved (computed or read from cache) with
+## cacheSolve function.
 
-## Write a short comment describing this function
+
+## Function makeCacheMatrix creates a list which contains
+## (1) a stored matrix to solve (cacheMatrix);
+## (2) a cashed inverse and a function to retrieve it (CachedInv & getInv);
+## (3) a function to set/store cached inverse (setInv).
+## Cached inverse (CachedInv) is set to NULL each time function is called, 
+## i.e. stored matrix is set/re-set
 
 makeCacheMatrix <- function(cachedMatrix = matrix()) {
     CachedInv <- NULL
@@ -14,7 +23,11 @@ makeCacheMatrix <- function(cachedMatrix = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## Function cacheSolve retirieves an inverse for a matrix set w/makeCacheMatrix.
+## It reads what is stored as cached inverse in makeCacheMatrix as x.Inv
+## Then it checks if a cached inverse actually exists (x.Inv is not NULL)
+## If it exists --> it's returned
+## If not (x.Inv is NULL) --> it's calculated, set to cache and then returned
 
 cacheSolve <- function(x) {
     x.Inv <- x$getInv()
